@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./assets/src/page-template.js");
 
-// Prompt for the team manager details
+// Prompt for the team manager details and create the object
 const promptManager = async () => {
     const managerDetails = await inquirer.prompt([
         {
@@ -42,15 +42,110 @@ const promptManager = async () => {
     return manager;
 };
 
+// Prompt for engineer details and create the object
+const promptEngineer = async () => {
+    const engineerDetails = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the engineer\'s name?',
+        },
+        {
+            type: 'input',
+            name: 'employeeid',
+            message: 'What is the engineer\'s id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the engineer\'s email address?',
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is the engineer\'s GitHub username?',
+        },
+    ]);
+
+    // Create an engineer object
+    const engineer = new Engineer(engineerDetails.name, engineerDetails.employeeid, engineerDetails.email, engineerDetails.github);
+
+    return engineer;
+};
+
+// Prompt for intern details and create the object
+const promptIntern = async () => {
+    const internDetails = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the intern\'s name?',
+        },
+        {
+            type: 'input',
+            name: 'employeeid',
+            message: 'What is the intern\'s id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the intern\'s email address?',
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What is the intern\'s school?',
+        },
+    ]);
+
+    // Create an intern object
+    const intern = new Intern(internDetails.name, internDetails.employeeid, internDetails.email, internDetails.school);
+
+    return intern;
+};
+
 // Gather employee information and generate HTML page
 const init = async () => {
     try {
+        // Prompt for the input of the manager
         const manager = await promptManager();
 
-        // TODO: Other team member prompts
-
-        // Array if team member objects
+        // Add new manager to the team members array
         const teamMembers = [manager];
+
+        // Set variable to record if we should prompt the user for another team member to be added
+        let addTeamMembers = true;
+
+        // While true, prompt the user to select a choice from the following
+        while (addTeamMembers) {
+            const { choice } = await inquirer.prompt({
+                type: 'list',
+                name: 'choice',
+                message: 'Please select an option',
+                choices: ['Add engineer', 'Add intern', 'Finish building team']
+            });
+
+            // Call the appropriate function to add a team member and push the new team member to the team members array, or finish building the team (setting the addTeamMembers variable to false) dependant on the user choice
+            switch (choice) {
+                case 'Add engineer':
+                    const engineer = await promptEngineer();
+                    teamMembers.push(engineer);
+                    console.log("An engineer has been added to the team successfully");
+                    break;
+                case 'Add intern':
+                    const intern = await promptIntern();
+                    teamMembers.push(intern);
+                    console.log("An intern has been added to the team successfully");
+                    break;
+                case 'Finish building team':
+                    addTeamMembers = false;
+                    console.log("Generating your completed team page");
+                    break;
+                default:
+                    console.log("Error, invalid choice. Please select a valid option.");
+                    break;
+            };
+        };
 
         // Generate HTML page with team members array
         const htmlPage = render(teamMembers);
@@ -61,7 +156,7 @@ const init = async () => {
         console.log("New Team page creation successful")
     } catch (error) {
         console.error("Error caught:", error);
-    }
+    };
 };
 
 init();
