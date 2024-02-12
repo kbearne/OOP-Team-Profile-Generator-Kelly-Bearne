@@ -10,11 +10,13 @@ class Engineer extends Employee {
 
     getGithub() {
         // TODO: validate for empty input
-
         return this.github;
     }
 
     getRole() {
-        return 'Engineer';
+        return "Engineer";
     }
 }
+
+// Export the class
+module.exports = Engineer;

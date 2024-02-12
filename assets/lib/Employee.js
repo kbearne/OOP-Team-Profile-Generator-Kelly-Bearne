@@ -1,5 +1,3 @@
-// TODO: Imports
-
 class Employee {
     constructor(name, id, email) {
         this.name = name;
@@ -9,18 +7,21 @@ class Employee {
 
     getName() {
         //TODO
+        return this.name;
     }
 
     getId() {
         //TODO
+        return this.id;
     }
 
     getEmail() {
         //TODO
+        return this.email;
     }
 
     getRole() {
-        return Employee;
+        return "Employee";
     }
 }
 
