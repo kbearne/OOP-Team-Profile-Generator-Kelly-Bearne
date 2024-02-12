@@ -2,13 +2,13 @@
   "name": "teamprofilegenerator",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {
-    "inquirer": "^9.2.14"
-  },
   "devDependencies": {
     "jest": "^29.7.0"
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "inquirer": "^6.3.1"
   }
 }
