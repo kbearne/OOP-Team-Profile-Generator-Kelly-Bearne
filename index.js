@@ -148,10 +148,10 @@ const init = async () => {
         };
 
         // Generate HTML page with team members array
-        const htmlPage = render(teamMembers);
+        const team = render(teamMembers);
 
         // Write (HTML) to file
-        fs.writeFileSync(outputPath, htmlPage);
+        fs.writeFileSync(outputPath, team);
 
         console.log("New Team page creation successful")
     } catch (error) {
