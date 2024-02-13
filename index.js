@@ -1,3 +1,4 @@
+// Import all required modules and classes
 const Manager = require("./assets/lib/Manager");
 const Engineer = require("./assets/lib/Engineer");
 const Intern = require("./assets/lib/Intern");
@@ -6,12 +7,13 @@ const inquirer = require('inquirer');
 const path = require("path");
 const fs = require("fs");
 
+// Variables storing file paths
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./assets/src/page-template.js");
 
-// Prompt for the team manager details and create the object
+// Prompt for the team manager details (via inquirer) and create the manager object
 const promptManager = async () => {
     const managerDetails = await inquirer.prompt([
         {
@@ -36,7 +38,7 @@ const promptManager = async () => {
         },
     ]);
 
-    // Create a new manager object
+    // Create a new manager object and return it
     const manager = new Manager(managerDetails.name, managerDetails.employeeid, managerDetails.email, managerDetails.officenumber);
 
     return manager;
@@ -67,7 +69,7 @@ const promptEngineer = async () => {
         },
     ]);
 
-    // Create an engineer object
+    // Create an engineer object and return it
     const engineer = new Engineer(engineerDetails.name, engineerDetails.employeeid, engineerDetails.email, engineerDetails.github);
 
     return engineer;
@@ -98,7 +100,7 @@ const promptIntern = async () => {
         },
     ]);
 
-    // Create an intern object
+    // Create an intern object and return it
     const intern = new Intern(internDetails.name, internDetails.employeeid, internDetails.email, internDetails.school);
 
     return intern;
@@ -107,16 +109,16 @@ const promptIntern = async () => {
 // Gather employee information and generate HTML page
 const init = async () => {
     try {
-        // Prompt for the input of the manager
+        // Prompt for the input of the manager details (by calling the promptManager function)
         const manager = await promptManager();
 
-        // Add new manager to the team members array
+        // Push the new manager object to the team members array
         const teamMembers = [manager];
 
-        // Set variable to record if we should prompt the user for another team member to be added
+        // Set variable to record if we should prompt the user for another team member to be added (initially set to 'true')
         let addTeamMembers = true;
 
-        // While true, prompt the user to select a choice from the following
+        // While true, prompt the user to select a choice from the following: add engineer, add intern or finish building the team (therefore generating the team.html page)
         while (addTeamMembers) {
             const { choice } = await inquirer.prompt({
                 type: 'list',
@@ -150,7 +152,7 @@ const init = async () => {
         // Generate HTML page with team members array
         const team = render(teamMembers);
 
-        // Write (HTML) to file
+        // Write (HTML) to file and print success message to console, otherwise if there is an error then catch the error and print it to console
         fs.writeFileSync(outputPath, team);
 
         console.log("New Team page creation successful")
@@ -159,4 +161,5 @@ const init = async () => {
     };
 };
 
+// Initialise the main function
 init();

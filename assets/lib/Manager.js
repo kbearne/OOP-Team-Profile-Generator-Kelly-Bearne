@@ -3,7 +3,7 @@ const Employee = require("./Employee");
 
 class Manager extends Employee {
     constructor(name, id, email, officeNumber) {
-        // Error handling for an office number that isn't a number
+        // Error handling to catch an officeNumber that isn't a number (must be typecast as a number due to the terminal reading input as string by default)
         officeNumber = Number(officeNumber);
         if (isNaN(officeNumber)) {
             throw new Error('The office number must be a number');

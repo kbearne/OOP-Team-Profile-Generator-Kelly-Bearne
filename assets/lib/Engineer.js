@@ -3,7 +3,7 @@ const Employee = require("./Employee");
 
 class Engineer extends Employee {
     constructor(name, id, email, github) {
-        // Validate for empty input
+        // Basic error checking for blank constructor value
         if (!github) {
             throw new Error('GitHub username cannot be blank, please enter a value')
         }

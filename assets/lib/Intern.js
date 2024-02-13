@@ -3,7 +3,7 @@ const Employee = require("./Employee");
 
 class Intern extends Employee {
     constructor(name, id, email, school) {
-        // Validate for empty input
+        // Basic error checking for blank constructor value
         if (!school) {
             throw new Error('School cannot be blank, please enter a value')
         }

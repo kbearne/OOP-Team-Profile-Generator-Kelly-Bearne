@@ -1,5 +1,4 @@
-/* Flex styling added to team cards */
-
+/* Flex styling added to team cards, along with margins and central alignment */
 .team-area {
     display: flex;
     flex-wrap: wrap;

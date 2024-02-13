@@ -1,17 +1,17 @@
 class Employee {
     constructor(name, id, email) {
-        // Basic error check for blank values
+        // Basic error checking for blank constructor values
         if (!name) {
-            throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
+            throw new Error('Name cannot be blank!')
         }
         if (!id) {
-            throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
+            throw new Error('ID cannot be blank!')
         }
         if (!email) {
-            throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
+            throw new Error('Email cannot be blank!')
         }
 
-        // Error handling for an id that isn't a number
+        // Error handling to catch an ID that isn't a number (must be typecast as a number due to the terminal reading input as string by default)
         id = Number(id);
         if (isNaN(id)) {
             throw new Error('The id must be a number');
