@@ -1,7 +1,13 @@
 class Employee {
     constructor(name, id, email) {
         // Basic error check for blank values
-        if (!name || !id || !email) {
+        if (!name) {
+            throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
+        }
+        if (!id) {
+            throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
+        }
+        if (!email) {
             throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
         }
 
@@ -31,7 +37,7 @@ class Employee {
     getRole() {
         return "Employee";
     }
-}
+};
 
 // Export the Employee class
 module.exports = Employee;
