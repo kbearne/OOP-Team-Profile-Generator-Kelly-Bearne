@@ -3,12 +3,19 @@ const Employee = require("./Employee");
 
 class Manager extends Employee {
     constructor(name, id, email, officeNumber) {
+        // Error handling for an office number that isn't a number
+        if (typeof officeNumber !== 'number' || Number.isNaN(officeNumber)) {
+            throw new Error('The office number must be a number');
+        }
+
         // Invoke the Superclass constructor
         super(name, id, email);
+
         this.officeNumber = officeNumber;
     }
 
     getOfficeNumber() {
+        // TODO validate for empty input or input that isn't a number
         return this.officeNumber;
     }
 

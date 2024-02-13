@@ -9,7 +9,7 @@ class Intern extends Employee {
     }
 
     getSchool() {
-        // TODO: validate for empty input or input that isn't text
+        // TODO: validate for empty input
 
         return this.school;
     }
