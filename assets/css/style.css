@@ -1,0 +1,13 @@
+/* Flex styling added to team cards */
+
+.team-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 -15px;
+}
+
+.team-area .card {
+    flex: 0 0 auto;
+    margin: 0 15px;
+}

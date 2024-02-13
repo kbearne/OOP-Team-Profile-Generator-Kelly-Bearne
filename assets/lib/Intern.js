@@ -3,14 +3,17 @@ const Employee = require("./Employee");
 
 class Intern extends Employee {
     constructor(name, id, email, school) {
+        // Validate for empty input
+        if (!school) {
+            throw new Error('School cannot be blank, please enter a value')
+        }
+
         // Invoke the Superclass constructor
         super(name, id, email);
         this.school = school;
     }
 
     getSchool() {
-        // TODO: validate for empty input
-
         return this.school;
     }
 

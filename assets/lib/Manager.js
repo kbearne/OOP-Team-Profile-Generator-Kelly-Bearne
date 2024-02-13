@@ -4,7 +4,8 @@ const Employee = require("./Employee");
 class Manager extends Employee {
     constructor(name, id, email, officeNumber) {
         // Error handling for an office number that isn't a number
-        if (typeof officeNumber !== 'number' || Number.isNaN(officeNumber)) {
+        officeNumber = Number(officeNumber);
+        if (isNaN(officeNumber)) {
             throw new Error('The office number must be a number');
         }
 
@@ -15,7 +16,6 @@ class Manager extends Employee {
     }
 
     getOfficeNumber() {
-        // TODO validate for empty input or input that isn't a number
         return this.officeNumber;
     }
 

@@ -4,9 +4,11 @@ class Employee {
         if (!name || !id || !email) {
             throw new Error('Values cannot be blank. Please ensure that every field contains a value.')
         }
+
         // Error handling for an id that isn't a number
-        if (typeof id !== 'number' || Number.isNaN(id)) {
-            throw new Error('The ID must be a number');
+        id = Number(id);
+        if (isNaN(id)) {
+            throw new Error('The id must be a number');
         }
 
         this.name = name;
